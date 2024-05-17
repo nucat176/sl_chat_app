@@ -18,24 +18,3 @@
 .chatBarButton {
   min-width: 40px;
 }
-
-.gifContainer {
-  display: flex;
-  overflow-x: auto;
-  white-space: nowrap;
-  padding: 10px 0;
-}
-
-.loadingContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-}
-
-.gifContainer img {
-  width: 100px;
-  height: 100px;
-  cursor: pointer;
-  margin-right: 10px;
-}

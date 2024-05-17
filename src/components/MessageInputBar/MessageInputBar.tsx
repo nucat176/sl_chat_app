@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { Button, Input, Spin } from 'antd';
+import { Button, Input } from 'antd';
 import { GifOutlined, SendOutlined, CloseOutlined } from '@ant-design/icons';
 
-import { MessageInputBarProps, Gif } from 'interfaces';
+import GifBar from 'components/GifBar';
 
 import styles from './MessageInputBar.module.css';
+
+interface MessageInputBarProps {
+  onSendMessage: (text: string) => void;
+}
 
 const MessageInputBar = ({ onSendMessage }: MessageInputBarProps) => {
   const [message, setMessage] = useState('');
@@ -32,45 +36,31 @@ const MessageInputBar = ({ onSendMessage }: MessageInputBarProps) => {
     setShowGifBar(false);
   };
 
-  const handleSend = () => {
+  const handleSendMessage = () => {
     if (message.trim()) {
       onSendMessage(message);
       setMessage('');
     }
   };
 
+  const onGifButtonClick = () => {
+    if (showGifBar) {
+      setShowGifBar(false);
+    } else {
+      setShowGifBar(true);
+
+      if (!gifs.length) {
+        fetchGifs();
+      }
+    }
+  };
+
   return (
     <div className={styles.footer}>
-      {showGifBar &&
-        (gifsLoading ? (
-          <div className={styles.loadingContainer}>
-            <Spin size="large" tip="Loading" />
-          </div>
-        ) : (
-          <div className={styles.gifContainer}>
-            {gifs.map((gif: Gif) => (
-              <img
-                key={gif.id}
-                src={gif.images.fixed_height.url}
-                alt="gif"
-                onClick={() => handleGifClick(gif.images.fixed_height.url)}
-              />
-            ))}
-          </div>
-        ))}
+      {showGifBar && <GifBar loading={gifsLoading} gifs={gifs} handleGifClick={handleGifClick} />}
       <div className={styles.inputBar}>
         <Button
-          onClick={() => {
-            if (showGifBar) {
-              setShowGifBar(false);
-            } else {
-              setShowGifBar(true);
-
-              if (!gifs.length) {
-                fetchGifs();
-              }
-            }
-          }}
+          onClick={onGifButtonClick}
           icon={showGifBar ? <CloseOutlined /> : <GifOutlined />}
           size="large"
           className={styles.chatBarButton}
@@ -81,9 +71,9 @@ const MessageInputBar = ({ onSendMessage }: MessageInputBarProps) => {
           placeholder="Type a message..."
           size="large"
           className={styles.input}
-          onPressEnter={handleSend}
+          onPressEnter={handleSendMessage}
         />
-        <Button onClick={handleSend} icon={<SendOutlined />} size="large" className={styles.chatBarButton} />
+        <Button onClick={handleSendMessage} icon={<SendOutlined />} size="large" className={styles.chatBarButton} />
       </div>
     </div>
   );

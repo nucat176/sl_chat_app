@@ -1,15 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Layout } from 'antd';
 
-import MessageGroup from 'components/MessageGroup/MessageGroup';
+import MessageGroup, { MessageGroupProps } from 'components/MessageGroup/MessageGroup';
 import MessageInputBar from 'components/MessageInputBar';
-import { Message, MessageGroupProps } from './interfaces';
 import { CURRENT_USER, OTHER_USERS } from 'users';
 import logo from './assets/sleeper-logo-w.png';
 
 import styles from './App.module.css';
 
 const { Header, Content, Footer } = Layout;
+
+export interface Message {
+  text: string;
+  name: string;
+  timestamp: string;
+  avatarUrl: string;
+}
 
 const App = () => {
   const [messages, setMessages] = useState<Message[]>([]);

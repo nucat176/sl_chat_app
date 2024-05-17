@@ -1,9 +1,15 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import { MessageGroupProps } from 'interfaces';
-
 import styles from './MessageGroup.module.css';
+
+export interface MessageGroupProps {
+  texts: string[];
+  name?: string;
+  timestamp?: string;
+  avatarUrl?: string;
+  mode?: 'EVEN' | 'ODD';
+}
 
 const isGifUrl = (url: string) => {
   return url.match(/\.(gif)$/i) !== null;
