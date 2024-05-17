@@ -1,0 +1,28 @@
+.message {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.even {
+  background-color: #f7f7f7;
+}
+
+.odd {
+  background-color: #ffffff;
+}
+
+.messageHeader {
+  display: flex;
+  align-items: center;
+}
+
+.messageHeader img {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  margin-right: 10px;
+}
+
+.messageHeader strong {
+  margin-right: 10px;
+}

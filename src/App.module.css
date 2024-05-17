@@ -1,0 +1,23 @@
+.layout {
+  height: 100dvh;
+  width: 100dvw;
+  overflow-y: hidden;
+}
+
+.header,
+.footer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  z-index: 1000;
+  padding: 0 10px;
+}
+
+.content {
+  overflow-y: auto;
+}
+
+.logo {
+  width: 207px;
+  height: 53px;
+}
